@@ -7,7 +7,7 @@ function enviarMensaje() {
     // Mostrar mensaje en pantalla
     const nuevoMensaje = document.createElement('div');
     nuevoMensaje.classList.add('mensaje');
-    nuevoMensaje.innerHTML = `<strong>🧑‍🦲 Tú:</strong> ${mensaje}`;
+    nuevoMensaje.innerHTML = `🦇 Tú:</strong> ${mensaje}`;
     output.appendChild(nuevoMensaje);
 
     // Limpiar input
