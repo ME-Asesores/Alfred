@@ -57,12 +57,59 @@
     window.leerDatos = leerDatos;
   </script>
 </head>
-<body class="chat">
-    <div class="chat-window">
-      <div id="chat-output"></div>
-      <input type="text" id="chat-input" placeholder="Habla con Alfred...">
-      <button onclick="enviarMensaje()">Enviar</button>
+<body>
+    <div id="chat-container"></div>
+    <div id="input-container">
+      <input type="text" id="user-input" placeholder="Habla con Alfred...">
+      <button id="send-btn">Enviar</button>
     </div>
+  
+    <script>
+      const apiKey = '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'; // <-- Reemplaza esto con tu API Key
+  
+      const chatContainer = document.getElementById('chat-container');
+      const userInput = document.getElementById('user-input');
+      const sendBtn = document.getElementById('send-btn');
+  
+      async function sendMessage() {
+        const userMessage = userInput.value.trim();
+        if (!userMessage) return;
+  
+        appendMessage(userMessage, 'user');
+        userInput.value = '';
+  
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: 'gpt-4',
+            messages: [
+              { role: 'system', content: 'Eres Alfred, el asistente personal del usuario. Aprende y recuerda todo lo que él diga.' },
+              { role: 'user', content: userMessage }
+            ]
+          })
+        });
+  
+        const data = await response.json();
+        const assistantMessage = data.choices[0].message.content;
+        appendMessage(assistantMessage, 'assistant');
+      }
+  
+      function appendMessage(message, sender) {
+        const div = document.createElement('div');
+        div.classList.add('message', sender);
+        div.textContent = message;
+        chatContainer.appendChild(div);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+  
+      sendBtn.addEventListener('click', sendMessage);
+      userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+      });
+    </script>
   </body>
-  <script src="chat.js"></script>
 </html>
