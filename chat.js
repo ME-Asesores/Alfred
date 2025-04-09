@@ -7,7 +7,7 @@ function enviarMensaje() {
     // Mostrar mensaje en pantalla
     const nuevoMensaje = document.createElement('div');
     nuevoMensaje.classList.add('mensaje');
-    nuevoMensaje.innerText = `🧑 Tú: ${mensaje}`;
+    nuevoMensaje.innerHTML = `<strong>🧑‍🦲 Tú:</strong> ${mensaje}`;
     output.appendChild(nuevoMensaje);
 
     // Limpiar input
@@ -19,7 +19,7 @@ function enviarMensaje() {
     // Aquí puedes agregar una respuesta automática de Alfred, si quieres
     const respuesta = document.createElement('div');
     respuesta.classList.add('mensaje');
-    respuesta.innerText = `🤖 Alfred: Estoy procesando tu mensaje...`;
+    respuesta.innerText = `🤵 Alfred: Estoy procesando tu mensaje...`;
     output.appendChild(respuesta);
     output.scrollTop = output.scrollHeight;
   }
