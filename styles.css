@@ -61,3 +61,12 @@ body.brain {
   min-width: 200px;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 }
+
+.mensaje {
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #222;
+    color: white;
+  }
+  
